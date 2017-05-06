@@ -1,0 +1,14 @@
+{
+  "name": "Online Booking Dash",
+  "description": "More deep details about the OnlineBooking",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "shipsy.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ]
+}

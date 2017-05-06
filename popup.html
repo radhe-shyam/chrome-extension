@@ -1,0 +1,99 @@
+<html>
+
+<head>
+    <title>Online Booking</title>
+    <link rel="stylesheet" href="boot.css">
+</head>
+
+<body style="width: 500px; height: 600px;">
+    <img src="icon.png" style="margin-bottom: 10px " />
+    <div ng-app="app" ng-controller="TopController as top">
+        <div class="container">
+            <!-- Dropdown -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <select class="form-control" id="sel1" ng-model="top.item" ng-change="top.itemSelected(top.item)">
+                            <option value="">Select option</option>
+                            <option value="cnote">C-note Detail</option>
+                            <option value="efr">EFR Details</option>
+                            <option value="pin">Pincode Details</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- Dropdown ends-->
+            <!-- C-note -->
+            <div ng-if="top.cnote">
+                <div class="form-group">
+                    <label for="cnote">Enter C-note / Ref No. :</label>
+                    <input type="text" class="form-control" id="cnote" ng-model="top.cnoteNum">
+                </div>
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary" ng-click="top.submitCnote(top.cnoteNum)">Submit</button>
+                </div>
+                <div class="row">
+                	<div class="col-md-12">
+                		<div ng-repeat="(key, value) in top.cnoteArr track by $index">
+                			<button class="btn btn-danger" data-toggle="collapse" data-target="#demo{{$index}}">Ref : {{value.AWBNo}}</button>
+                			<div id="demo{{$index}}" class="collapse">
+                				<p ng-repeat="(key1, value1) in value"><b>{{key1}} :</b> {{value1}}</p>
+                			</div>
+                		</div>
+                	</div>
+                </div>
+            </div>
+            <!-- C-note ends-->
+            <!-- EFR code -->
+            <div ng-if="top.efr">
+                <div class="form-group">
+                    <label for="efr">Enter Username:</label>
+                    <input type="text" class="form-control" id="efr" ng-model="top.efrNum">
+                </div>
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary" ng-click="top.submitEfr(top.efrNum)">Submit</button>
+                </div>
+                <div class="row">
+                	<div class="col-md-12">
+                		<p ng-repeat="(key, value) in top.efrData"><b>{{key}} :</b> {{value}}</p>
+                	</div>
+                </div>
+            </div>
+            <!-- EFR code ends-->
+            <!-- Pincode details -->
+            <div ng-if="top.pin">
+                <table class="table">
+                    <tr>
+                        <td style="border-color: #fff">
+                            <div class="form-group">
+                                <label for="spin">Enter Source pincode:</label>
+                                <input type="text" class="form-control" id="spin" ng-model="top.pinNum.source">
+                            </div>
+                        </td>
+                        <td style="border-color: #fff">
+                            <div class="form-group">
+                                <label for="spin">Enter Destination pincode:</label>
+                                <input type="text" class="form-control" id="spin" ng-model="top.pinNum.dest">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                    		<td style="border-color: #fff"><p ng-repeat="(key, value) in top.pinData.src"><b>{{key}} - </b>{{value}}</p></td>
+                    		<td style="border-color: #fff"><p ng-repeat="(key, value) in top.pinData.dst"><b>{{key}} - </b>{{value}}</p></td>
+                    </tr>
+                </table>
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary" ng-click="top.submitPin(top.pinNum)">Submit</button>
+                </div>
+            </div>
+        </div>
+        <!-- Pincode details ends-->
+    </div>
+    </div>
+    <script src="lib.js"></script>
+    <script src="app.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="boot.js"></script>
+</body>
+
+</html>
