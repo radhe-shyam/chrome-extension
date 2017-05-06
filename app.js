@@ -7,7 +7,7 @@ TopController.$inject = ['$scope', '$http'];
 function TopController($scope, $http) {
     self = this;
     self.item = "cnote";
-    self.baseUrl = "http://testonlinebooking.shipsy.in:2200/";
+    self.baseUrl = "http://35.162.6.127/";
     self.cnoteNum, self.pinNum = {}, self.efrNum;
     self.options = ['C-note Details', 'EFR Details', 'Pincode Details'];
     self.itemSelected = itemSelected;

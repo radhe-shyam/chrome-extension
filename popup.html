@@ -5,7 +5,35 @@
     <link rel="stylesheet" href="boot.css">
     <link rel="stylesheet" href="custom.css">
 </head>
+<style>
+.circle {
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    border: #1287cd solid 2px;
+    background-color: #1287cd;
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+.circle > .tooltiptext {
+    visibility: hidden;
+    min-width: 100px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
 
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.circle:hover > .tooltiptext {
+    visibility: visible;
+}
+</style>
 <body style="width: 500px; height: 600px;">
     <img src="icon.png" style="margin-bottom: 10px " />
     <div ng-app="app" ng-controller="TopController as top">
@@ -52,6 +80,10 @@
                                         </div>
                                         <br>
                                     </div>
+                                    
+                                        <div class='circle' ng-repeat="(key2, value2) in value['statusStack']">
+                                <span class='tooltiptext'>| {{value2.status}} |<br>| {{value2.txnTimestamp}} |<br>| {{value2.doneBy}} |<br>| {{value2.comment}} |</span>
+                                </div>
                                 </div>
                             </div>
                         </div>
