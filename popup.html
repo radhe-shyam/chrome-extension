@@ -34,9 +34,8 @@
     visibility: visible;
 }
 </style>
-
-<body style="width: 500px; height: 600px;">
-    <img src="icon.png" style="margin-bottom: 10px " />
+<body style="width: 500px; margin-bottom: 20px;">
+    <h3 align="center">Smart Online Dashboard</h3>
     <div ng-app="app" ng-controller="TopController as top">
         <div class="container">
             <!-- Dropdown -->
@@ -115,13 +114,13 @@
                     <tr>
                         <td style="border-color: #fff">
                             <div class="form-group">
-                                <label for="spin">Enter Source pincode:</label>
+                                <label for="spin">Source pincode:</label>
                                 <input type="text" class="form-control" id="spin" ng-model="top.pinNum.source">
                             </div>
                         </td>
                         <td style="border-color: #fff">
                             <div class="form-group">
-                                <label for="spin">Enter Destination pincode:</label>
+                                <label for="spin">Destination pincode:</label>
                                 <input type="text" class="form-control" id="spin" ng-model="top.pinNum.dest">
                             </div>
                         </td>
