@@ -15,6 +15,7 @@
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
+    margin-right: 15px;
 }
 
 .circle > .tooltiptext {
@@ -34,6 +35,7 @@
     visibility: visible;
 }
 </style>
+
 <body style="width: 500px; margin-bottom: 20px;">
     <h3 align="center">Smart Online Dashboard</h3>
     <div ng-app="app" ng-controller="TopController as top">
@@ -63,27 +65,29 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div ng-repeat="(key, value) in top.cnoteArr track by $index">
-                            <button class="btn btn-danger" data-toggle="collapse" data-target="#demo{{$index}}">Ref : {{value.AWBNo}}</button>
+                            <button class="btn btn-danger" data-toggle="collapse" data-target="#demo{{$index}}" style="margin: 5px;">Ref : {{value.AWBNo}}</button>
                             <div id="demo{{$index}}" class="collapse">
                                 <div style="display: grid">
                                     <div ng-repeat="(key1, value1) in value" class="cnote-list" style="">
-                                        <div><b>{{key1}} :</b></div>
+                                        <div><b>{{key1}} :&nbsp</b></div>
                                         <div ng-if="key1 == 'srcAddress' || key1 == 'dstAddress'">{{value1.name}}
                                             <br>{{value1.addressLine1}}
                                             <br>{{value1.addressLine2}}
                                             <br>{{value1.cityName}},{{value1.stateName}}
                                             <br>{{value1.pincode}}
                                         </div>
-                                        <div ng-if="key1 != 'srcAddress' && key1 != 'dstAddress' && key1 != 'PUOrRequestTimestamp'">
+                                        <div ng-if="key1 != 'srcAddress' && key1 != 'dstAddress' && key1 != 'PUOrRequestTimestamp' && key1 != 'statusStack'" ">
                                             {{value1}}
                                         </div>
-                                        <div ng-if="key1 == 'PUOrRequestTimestamp'">
-                                            <rs-time start-time="value1" digital-format="'d MMM  h:mm TT'"></rs-time>
+                                        <div ng-if="key1=='PUOrRequestTimestamp' ">
+                                            <rs-time start-time="value1 " digital-format=" 'd MMM  h:mm TT' "></rs-time>
+                                        </div>
+                                        <div>
+                                            <div class='circle' ng-if="key1=='statusStack' " ng-repeat="(key2, value2) in value[ 'statusStack'] ">
+                                            <span class='tooltiptext'>{{value2.status}}<br><rs-time start-time="value2.txnTimestamp " digital-format=" 'd MMM  h:mm TT' "></rs-time><br>{{value2.doneBy}}<br> {{value2.comment}}</span>
+                                        </div>
                                         </div>
                                         <br>
-                                    </div>
-                                    <div class='circle' ng-repeat="(key2, value2) in value['statusStack']">
-                                        <span class='tooltiptext'>| {{value2.status}} |<br>| {{value2.txnTimestamp}} |<br>| {{value2.doneBy}} |<br>| {{value2.comment}} |</span>
                                     </div>
                                 </div>
                             </div>
@@ -93,60 +97,62 @@
             </div>
             <!-- C-note ends-->
             <!-- EFR code -->
-            <div ng-if="top.efr">
-                <div class="form-group">
-                    <label for="efr">Enter Username:</label>
-                    <input type="text" class="form-control" id="efr" ng-model="top.efrNum">
+            <div ng-if="top.efr ">
+                <div class="form-group ">
+                    <label for="efr ">Enter Username:</label>
+                    <input type="text " class="form-control " id="efr " ng-model="top.efrNum ">
                 </div>
-                <div class="text-right">
-                    <button type="button" class="btn btn-primary" ng-click="top.submitEfr(top.efrNum)">Submit</button>
+                <div class="text-right ">
+                    <button type="button " class="btn btn-primary " ng-click="top.submitEfr(top.efrNum) ">Submit</button>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p ng-repeat="(key, value) in top.efrData"><b>{{key}} :</b> {{value}}</p>
+                <div class="row ">
+                    <div class="col-md-12 ">
+                        <p ng-repeat="(key, value) in top.efrData "><b>{{key}} :</b> {{value}}</p>
                     </div>
                 </div>
             </div>
             <!-- EFR code ends-->
             <!-- Pincode details -->
-            <div ng-if="top.pin">
-                <table class="table">
+            <div ng-if="top.pin ">
+                <table class="table " style="margin: 0px ">
                     <tr>
-                        <td style="border-color: #fff">
-                            <div class="form-group">
-                                <label for="spin">Source pincode:</label>
-                                <input type="text" class="form-control" id="spin" ng-model="top.pinNum.source">
+                        <td style="border-color: #fff ">
+                            <div class="form-group ">
+                                <label for="spin ">Source pincode:</label>
+                                <input type="text " class="form-control " id="spin " ng-model="top.pinNum.source ">
                             </div>
                         </td>
-                        <td style="border-color: #fff">
-                            <div class="form-group">
-                                <label for="spin">Destination pincode:</label>
-                                <input type="text" class="form-control" id="spin" ng-model="top.pinNum.dest">
+                        <td style="border-color: #fff ">
+                            <div class="form-group ">
+                                <label for="spin ">Destination pincode:</label>
+                                <input type="text " class="form-control " id="spin " ng-model="top.pinNum.dest ">
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="border-color: #fff">
-                            <p ng-repeat="(key, value) in top.pinData.src"><b>{{key}} - </b>{{value}}</p>
-                        </td>
-                        <td style="border-color: #fff">
-                            <p ng-repeat="(key, value) in top.pinData.dst"><b>{{key}} - </b>{{value}}</p>
                         </td>
                     </tr>
                 </table>
-                <div class="text-right">
-                    <button type="button" class="btn btn-primary" ng-click="top.submitPin(top.pinNum)">Submit</button>
+                <div class="text-right ">
+                    <button type="button " class="btn btn-primary " ng-click="top.submitPin(top.pinNum) ">Search</button>
                 </div>
+                <table class="table ">
+                    <tr>
+                        <td style="border-color: #fff ">
+                            <p ng-repeat="(key, value) in top.pinData.src "><b>{{key}} - </b>{{value}}</p>
+                        </td>
+                        <td style="border-color: #fff ">
+                            <p ng-repeat="(key, value) in top.pinData.dst "><b>{{key}} - </b>{{value}}</p>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
         <!-- Pincode details ends-->
     </div>
     </div>
-    <script src="lib.js"></script>
-    <script src="app.js"></script>
-    <script src="jquery.min.js"></script>
-    <script src="boot.js"></script>
-    <script type="text/javascript" src="myTime.js"></script>
+    <script src="lib.js "></script>
+    <script src="app.js "></script>
+    <script src="jquery.min.js "></script>
+    <script src="boot.js "></script>
+    <script type="text/javascript " src="myTime.js "></script>
 </body>
 
 </html>
