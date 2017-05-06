@@ -134,6 +134,11 @@
                     <button type="button " class="btn btn-primary " ng-click="top.submitPin(top.pinNum) ">Search</button>
                 </div>
                 <table class="table ">
+                    <tr ng-if="top.pinData.price"">
+                        <td style="border-color: #fff " colspan="2">
+                            <p><b>Price Calculation Base - </b>{{top.pinData.price}}</p>
+                        </td>
+                    </tr>
                     <tr>
                         <td style="border-color: #fff ">
                             <p ng-repeat="(key, value) in top.pinData.src "><b>{{key}} - </b>{{value}}</p>

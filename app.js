@@ -89,7 +89,8 @@ function TopController($scope, $http) {
                 if(response.status===200){
                 	self.pinData = {
                 		src: response.data.data.sourcePincode,
-                		dst: response.data.data.destinationPincode
+                		dst: response.data.data.destinationPincode,
+                        price: response.data.data.priceCalculationBase
                 	}
                 }
             }, function(error) {
