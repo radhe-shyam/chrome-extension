@@ -7,8 +7,8 @@
 </head>
 <style>
 .circle {
-    width:20px;
-    height:20px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     border: #1287cd solid 2px;
     background-color: #1287cd;
@@ -16,6 +16,7 @@
     display: inline-block;
     border-bottom: 1px dotted black;
 }
+
 .circle > .tooltiptext {
     visibility: hidden;
     min-width: 100px;
@@ -24,7 +25,6 @@
     text-align: center;
     border-radius: 6px;
     padding: 5px 5px;
-
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
@@ -34,6 +34,7 @@
     visibility: visible;
 }
 </style>
+
 <body style="width: 500px; height: 600px;">
     <img src="icon.png" style="margin-bottom: 10px " />
     <div ng-app="app" ng-controller="TopController as top">
@@ -42,8 +43,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <select class="form-control" id="sel1" ng-model="top.item" ng-change="top.itemSelected(top.item)" >
-                            <option value="">Select option</option>
+                        <select class="form-control" id="sel1" ng-model="top.item" ng-change="top.itemSelected(top.item)">
                             <option value="cnote">C-note Detail</option>
                             <option value="efr">EFR Details</option>
                             <option value="pin">Pincode Details</option>
@@ -67,7 +67,7 @@
                             <button class="btn btn-danger" data-toggle="collapse" data-target="#demo{{$index}}">Ref : {{value.AWBNo}}</button>
                             <div id="demo{{$index}}" class="collapse">
                                 <div style="display: grid">
-                                    <div ng-repeat="(key1, value1) in value" class="cnote-list"style="">
+                                    <div ng-repeat="(key1, value1) in value" class="cnote-list" style="">
                                         <div><b>{{key1}} :</b></div>
                                         <div ng-if="key1 == 'srcAddress' || key1 == 'dstAddress'">{{value1.name}}
                                             <br>{{value1.addressLine1}}
@@ -75,15 +75,17 @@
                                             <br>{{value1.cityName}},{{value1.stateName}}
                                             <br>{{value1.pincode}}
                                         </div>
-                                        <div ng-if="key1 != 'srcAddress' && key1 != 'dstAddress'">
+                                        <div ng-if="key1 != 'srcAddress' && key1 != 'dstAddress' && key1 != 'PUOrRequestTimestamp'">
                                             {{value1}}
+                                        </div>
+                                        <div ng-if="key1 == 'PUOrRequestTimestamp'">
+                                            <rs-time start-time="value1" digital-format="'d MMM  h:mm TT'"></rs-time>
                                         </div>
                                         <br>
                                     </div>
-                                    
-                                        <div class='circle' ng-repeat="(key2, value2) in value['statusStack']">
-                                <span class='tooltiptext'>| {{value2.status}} |<br>| {{value2.txnTimestamp}} |<br>| {{value2.doneBy}} |<br>| {{value2.comment}} |</span>
-                                </div>
+                                    <div class='circle' ng-repeat="(key2, value2) in value['statusStack']">
+                                        <span class='tooltiptext'>| {{value2.status}} |<br>| {{value2.txnTimestamp}} |<br>| {{value2.doneBy}} |<br>| {{value2.comment}} |</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -145,6 +147,7 @@
     <script src="app.js"></script>
     <script src="jquery.min.js"></script>
     <script src="boot.js"></script>
+    <script type="text/javascript" src="myTime.js"></script>
 </body>
 
 </html>

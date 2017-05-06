@@ -1,5 +1,5 @@
 angular
-    .module('app', [])
+    .module('app', ['rstime'])
     .controller('TopController', TopController);
 
 TopController.$inject = ['$scope', '$http'];
