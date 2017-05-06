@@ -84,7 +84,7 @@
                                         </div>
                                         <div>
                                             <div class='circle' ng-if="key1=='statusStack' " ng-repeat="(key2, value2) in value[ 'statusStack'] ">
-                                            <span class='tooltiptext'>{{value2.status}}<br><rs-time start-time="value2.txnTimestamp " digital-format=" 'd MMM  h:mm TT' "></rs-time><br>{{value2.doneBy}}<br> {{value2.comment}}</span>
+                                            <span class='tooltiptext'>{{value2.status}}<br><rs-time start-time="value2.txnTimestamp " digital-format=" 'd MMM  h:mm TT' "></rs-time><br>Done &nbspBy:&nbsp{{value2.doneBy}}<br>Comment:&nbsp&nbsp {{value2.comment}}</span>
                                         </div>
                                         </div>
                                         <br>
