@@ -3,6 +3,7 @@
 <head>
     <title>Online Booking</title>
     <link rel="stylesheet" href="boot.css">
+    <link rel="stylesheet" href="custom.css">
 </head>
 
 <body style="width: 500px; height: 600px;">
@@ -13,7 +14,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <select class="form-control" id="sel1" ng-model="top.item" ng-change="top.itemSelected(top.item)">
+                        <select class="form-control" id="sel1" ng-model="top.item='cnote'" ng-change="top.itemSelected(top.item)" >
                             <option value="">Select option</option>
                             <option value="cnote">C-note Detail</option>
                             <option value="efr">EFR Details</option>
@@ -33,14 +34,28 @@
                     <button type="button" class="btn btn-primary" ng-click="top.submitCnote(top.cnoteNum)">Submit</button>
                 </div>
                 <div class="row">
-                	<div class="col-md-12">
-                		<div ng-repeat="(key, value) in top.cnoteArr track by $index">
-                			<button class="btn btn-danger" data-toggle="collapse" data-target="#demo{{$index}}">Ref : {{value.AWBNo}}</button>
-                			<div id="demo{{$index}}" class="collapse">
-                				<p ng-repeat="(key1, value1) in value"><b>{{key1}} :</b> {{value1}}</p>
-                			</div>
-                		</div>
-                	</div>
+                    <div class="col-md-12">
+                        <div ng-repeat="(key, value) in top.cnoteArr track by $index">
+                            <button class="btn btn-danger" data-toggle="collapse" data-target="#demo{{$index}}">Ref : {{value.AWBNo}}</button>
+                            <div id="demo{{$index}}" class="collapse">
+                                <div style="display: grid">
+                                    <div ng-repeat="(key1, value1) in value" class="cnote-list"style="">
+                                        <div><b>{{key1}} :</b></div>
+                                        <div ng-if="key1 == 'srcAddress' || key1 == 'dstAddress'">{{value1.name}}
+                                            <br>{{value1.addressLine1}}
+                                            <br>{{value1.addressLine2}}
+                                            <br>{{value1.cityName}},{{value1.stateName}}
+                                            <br>{{value1.pincode}}
+                                        </div>
+                                        <div ng-if="key1 != 'srcAddress' && key1 != 'dstAddress'">
+                                            {{value1}}
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- C-note ends-->
@@ -54,9 +69,9 @@
                     <button type="button" class="btn btn-primary" ng-click="top.submitEfr(top.efrNum)">Submit</button>
                 </div>
                 <div class="row">
-                	<div class="col-md-12">
-                		<p ng-repeat="(key, value) in top.efrData"><b>{{key}} :</b> {{value}}</p>
-                	</div>
+                    <div class="col-md-12">
+                        <p ng-repeat="(key, value) in top.efrData"><b>{{key}} :</b> {{value}}</p>
+                    </div>
                 </div>
             </div>
             <!-- EFR code ends-->
@@ -78,8 +93,12 @@
                         </td>
                     </tr>
                     <tr>
-                    		<td style="border-color: #fff"><p ng-repeat="(key, value) in top.pinData.src"><b>{{key}} - </b>{{value}}</p></td>
-                    		<td style="border-color: #fff"><p ng-repeat="(key, value) in top.pinData.dst"><b>{{key}} - </b>{{value}}</p></td>
+                        <td style="border-color: #fff">
+                            <p ng-repeat="(key, value) in top.pinData.src"><b>{{key}} - </b>{{value}}</p>
+                        </td>
+                        <td style="border-color: #fff">
+                            <p ng-repeat="(key, value) in top.pinData.dst"><b>{{key}} - </b>{{value}}</p>
+                        </td>
                     </tr>
                 </table>
                 <div class="text-right">
